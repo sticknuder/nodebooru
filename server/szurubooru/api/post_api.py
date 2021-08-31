@@ -9,6 +9,7 @@ from szurubooru.func import (
     posts,
     scores,
     serialization,
+    similar,
     snapshots,
     tags,
     versions,
@@ -307,4 +308,41 @@ def get_posts_by_image(
             }
             for distance, post in lookalikes
         ],
+    }
+
+
+@rest.routes.get("/posts/median/?")
+def get_posts_median(
+    ctx: rest.Context, _params: Dict[str, str] = {}
+) -> rest.Response:
+    auth.verify_privilege(ctx.user, "posts:list")
+    _search_executor_config.user = ctx.user
+    query_text = ctx.get_param_as_string("query", default="")
+    total_count = _search_executor.count(query_text)
+    offset = ceil(total_count / 2) - 1
+    _, results = _search_executor.execute(query_text, offset, 1)
+    return {
+        "query": query_text,
+        "offset": offset,
+        "limit": 1,
+        "total": len(results),
+        "results": list([_serialize_post(ctx, post) for post in results])
+    }
+
+
+@rest.routes.get("/post/(?P<post_id>[^/]+)/similar/?")
+def get_posts_similar(
+    ctx: rest.Context, params: Dict[str, str]
+) -> rest.Response:
+    auth.verify_privilege(ctx.user, "posts:view:similar")
+    _search_executor_config.user = ctx.user
+    post_id = _get_post_id(params)
+    post = posts.get_post_by_id(post_id)
+    limit = ctx.get_param_as_int("limit", default=10, min=1, max=100)
+    results = similar.find_similar_posts(post, limit)
+    return {
+        "limit": limit,
+        "results": list([
+            posts.serialize_micro_post(result, ctx.user) for result in results
+        ])
     }
