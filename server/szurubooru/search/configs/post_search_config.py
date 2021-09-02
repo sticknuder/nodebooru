@@ -149,6 +149,81 @@ def _category_filter(
 
     return query.filter(expr)
 
+# includes the given post itself
+def _similar_filter(
+    query: SaQuery, criterion: Optional[criteria.BaseCriterion], negated: bool
+) -> SaQuery:
+    assert criterion
+    # subquery for tags of the given post (post id in criterion)
+    filter_func_tag = search_util.create_num_filter(model.PostTag.post_id)
+    tag_query = db.session.query(model.PostTag.tag_id)
+    tag_query = filter_func_tag(tag_query, criterion, False)
+    tag_query = tag_query.subquery("source_tags")
+
+    # subquery for posts with matching tags
+    pt_alias = sa.orm.aliased(model.PostTag)
+    subquery = (
+        db.session.query(pt_alias.post_id)
+        .filter(pt_alias.tag_id.in_(tag_query))
+        .group_by(pt_alias.post_id)
+        .subquery("similar_posts")
+    )
+    expr = model.Post.post_id.in_(subquery)
+    if negated:
+        expr = ~expr
+    return query.filter(expr)
+
+
+def _create_metric_num_filter(name: str):
+    def wrapper(
+        query: SaQuery,
+        criterion: Optional[criteria.BaseCriterion],
+        negated: bool,
+    ) -> SaQuery:
+        assert criterion
+        t = sa.orm.aliased(model.TagName)
+        pm = sa.orm.aliased(model.PostMetric)
+        expr = t.name == name
+        expr = expr & search_util.apply_num_criterion_to_column(
+            pm.value, criterion, search_util.float_transformer)
+        if negated:
+            expr = ~expr
+        ret = (
+            query
+            .join(pm, pm.post_id == model.Post.post_id)
+            .join(t, t.tag_id == pm.tag_id)
+            .filter(expr))
+        return ret
+    return wrapper
+def _metric_presence_filter(
+    query: SaQuery,
+    criterion: Optional[criteria.BaseCriterion],
+    negated: bool,
+) -> SaQuery:
+    assert criterion
+    t = sa.orm.aliased(model.TagName)
+    tag_name_filter = search_util.apply_str_criterion_to_column(
+        t.name, criterion)
+    pm = sa.orm.aliased(model.PostMetric)
+    subquery = (
+        db.session.query(pm.post_id)
+        .join(t, t.tag_id == pm.tag_id)
+        .filter(tag_name_filter)
+        .subquery())
+    post_filter = model.Post.post_id.in_(subquery)
+    if negated:
+        post_filter = ~post_filter
+    return query.filter(post_filter)
+def _create_metric_sort_column(metric_name: str):
+    t = sa.orm.aliased(model.TagName)
+    pm = sa.orm.aliased(model.PostMetric)
+    ret = (
+        db.session.query(pm.value)
+        .filter(pm.post_id == model.Post.post_id)
+        .join(t, t.tag_id == pm.tag_id)
+        .filter(t.name == metric_name)
+        .as_scalar())
+    return ret
 
 class PostSearchConfig(BaseSearchConfig):
     def __init__(self) -> None:
@@ -378,6 +453,7 @@ class PostSearchConfig(BaseSearchConfig):
                 ),
                 (["pool"], _pool_filter),
                 (["category"], _category_filter),
+                (["similar"], _similar_filter),
             ]
         )
 
