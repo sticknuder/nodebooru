@@ -1,7 +1,16 @@
-<p>Szurubooru is an image board engine inspired by services such as Danbooru,
-Gelbooru and Moebooru. Its name <a href='http://sjp.pwn.pl/sjp/;2527372'>has
-its roots in Polish language and has onomatopeic meaning of scraping or
-scrubbing</a>. It is pronounced as <em>shoorubooru</em>.</p>
+<p>Nodebooru is an image board for Stick Nodes related content inspired by services such as Danbooru,
+Gelbooru, and Moebooru. It runs on the open source image board engine Szurubooru.</p>
+
+<p class='section'><strong>Upload Policy<strong></p>
+
+<p>The purpose of booru sites is to amass content by allowing any user to 
+upload content (even the content of other artists). For this reason, it would 
+be extremely difficult to check whether uploaders have permission for every 
+single post. Therefore, we enact a strong retroactive policy instead.</p>
+
+<p>If you are an artist who would like your works removed from the site, 
+please contact the site admin at either thiccnoder@gmail.com or @sticknuder 
+on Discord. Your works will be removed promptly.</p>
 
 <p class='section'><strong>Registration</strong></p>
 
