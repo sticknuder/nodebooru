@@ -18,7 +18,7 @@ class TagCategoriesController {
         }
 
         topNavigation.activate("tags");
-        topNavigation.setTitle("Listing tags");
+        topNavigation.setTitle("Tags");
         TagCategoryList.get().then(
             (response) => {
                 this._tagCategories = response.results;

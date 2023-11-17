@@ -1,5 +1,5 @@
-<p>Nodebooru is an image board for Stick Nodes related content inspired by services such as Danbooru,
-Gelbooru, and Moebooru. It runs on the open source image board engine Szurubooru.</p>
+<p>Nodebooru is an image board for <a href="https://sticknodes.com/">Stick Nodes</a> related content inspired by services such as Danbooru,
+Gelbooru, and Moebooru. It runs on the open source image board engine <a href="https://github.com/rr-/szurubooru">Szurubooru</a>.</p>
 
 <p class='section'><strong>Upload Policy<strong></p>
 
@@ -15,8 +15,11 @@ on Discord. Your works will be removed promptly.</p>
 <p class='section'><strong>Registration</strong></p>
 
 <p>The e-mail you enter during account creation is only used to retrieve your
-Gravatar and for password reminders. Only you can see it (well, except the
-database staff&hellip; we won&rsquo;t spam your mailbox anyway).</p>
+Gravatar and for password resets (currently disabled until I can set up a smtp server). Only you, admins, and the owner can see it.</p>
 
-<p>Oh, and you can delete your account at any time. Posts you uploaded will
+<p>You can delete your account at any time. Posts you uploaded will
 stay, unless some angry admin removes them.</p>
+
+<p class='section'><strong>Communication</strong></p>
+
+<p>For real-time communication with the community, moderators, admins, and the owner, join the official <a href="https://discord.com/invite/f9ZwGgBHz9">Nodebooru Discord Server</a>.</p>
