@@ -42,7 +42,7 @@ class UserController {
             );
         }
 
-        topNavigation.setTitle("User " + userName);
+        topNavigation.setTitle(userName);
         Promise.all([userTokenPromise, User.get(userName)]).then(
             (responses) => {
                 const [userTokens, user] = responses;

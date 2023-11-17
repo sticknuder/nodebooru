@@ -18,7 +18,7 @@ class PoolCategoriesController {
         }
 
         topNavigation.activate("pools");
-        topNavigation.setTitle("Listing pools");
+        topNavigation.setTitle("Pools");
         PoolCategoryList.get().then(
             (response) => {
                 this._poolCategories = response.results;

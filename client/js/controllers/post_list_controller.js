@@ -36,7 +36,7 @@ class PostListController {
         this._ctx = ctx;
 
         topNavigation.activate("posts");
-        topNavigation.setTitle("Listing posts");
+        topNavigation.setTitle("Posts");
 
         this._headerView = new PostsHeaderView({
             hostNode: this._pageController.view.pageHeaderHolderNode,
