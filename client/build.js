@@ -94,6 +94,9 @@ function bundleHtml() {
         .replace('<!-- Base HTML Placeholder -->', `<base href="${baseUrl()}"/>`);
     fs.writeFileSync('./public/index.htm', minifyHtml(baseHtml));
 
+    const sitemapTxt = readTextFile('./sitemap.txt');
+    fs.writeFileSync('./public/sitemap.txt', sitemapTxt);
+
     let compiledTemplateJs = [
         `'use strict';`,
         `let _ = require('underscore');`,
