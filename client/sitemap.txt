@@ -1,2 +1,4 @@
 https://nodebooru.com/posts
-https://nodebooru.com/help/about
+https://nodebooru.com/help
+https://nodebooru.com/tags
+https://nodebooru.com/pools

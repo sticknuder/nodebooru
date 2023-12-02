@@ -1,5 +1,9 @@
-<p>Nodebooru is an image board for <a href="https://sticknodes.com/">Stick Nodes</a> related content inspired by services such as Danbooru,
-Gelbooru, and Moebooru. It runs on the open source image board engine <a href="https://github.com/rr-/szurubooru">Szurubooru</a>.</p>
+<p>Nodebooru is an image board for NSFW <a href="https://sticknodes.com/">Stick Nodes</a> related content inspired by services such as Danbooru,
+Gelbooru, Moebooru, Rule34, r34, and panheal. It runs on the open source image board engine <a href="https://github.com/rr-/szurubooru">Szurubooru</a>.</p>
+
+<p>Nodebooru aims to be the best source of all kinds of Stick Nodes porn and other "not suitable for work" content. Full nudity, sex, obscenity, hentai reminiscent art, etc is allowed and encouraged.</p>
+
+<p><strong>You must be 18 years or older to use this site.<strong></p>
 
 <p class='section'><strong>Upload Policy<strong></p>
 
@@ -23,3 +27,7 @@ stay, unless some angry admin removes them.</p>
 <p class='section'><strong>Communication</strong></p>
 
 <p>For real-time communication with the community, moderators, admins, and the owner, join the official <a href="https://discord.com/invite/f9ZwGgBHz9">Nodebooru Discord Server</a>.</p>
+
+<p class='section'><strong>Search Engine Optimization</strong></p>
+
+<p>Find Stick Nodes content that includes things such as boobs, pussy, ass, vagina, cock, penis, cum, blowjob, handjob, nudes, sex, butt, tits, and more.</p>
