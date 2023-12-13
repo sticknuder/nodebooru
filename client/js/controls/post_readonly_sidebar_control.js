@@ -6,7 +6,6 @@ const settings = require("../models/settings.js");
 const views = require("../util/views.js");
 const uri = require("../util/uri.js");
 const misc = require("../util/misc.js");
-const PostMetricListControl = require("./post_metric_list_control.js");
 const PostList = require("../models/post_list.js");
 
 const template = views.getTemplate("post-readonly-sidebar");
@@ -43,11 +42,6 @@ class PostReadonlySidebarControl extends events.EventTarget {
         this._installScore();
         this._installFitButtons();
         this._syncFitButton();
-        if (this._metricsListNode) {
-            this._metricsControl = new PostMetricListControl(
-                this._metricsListNode, this._post
-            );
-        }
         this._loadSimilarPosts();
     }
 
@@ -89,10 +83,6 @@ class PostReadonlySidebarControl extends events.EventTarget {
 
     get _fitHeightButtonNode() {
         return this._hostNode.querySelector(".fit-height");
-    }
-
-    get _metricsListNode() {
-        return this._hostNode.querySelector("ul.compact-post-metrics");
     }
 
     get _similarListNode() {
@@ -245,16 +235,16 @@ class PostReadonlySidebarControl extends events.EventTarget {
             parseInt(settings.get().similarPosts),
             ["id", "thumbnailUrl"],
         )
-        .then((response) => {
-            const listNode = this._similarListNode;
-            for (let post of response.results) {
-                let poseNode = similarItemTemplate({
-                    id: post.id,
-                    thumbnailUrl: post.thumbnailUrl,
-                });
-                listNode.appendChild(poseNode);
-            }
-        });
+            .then((response) => {
+                const listNode = this._similarListNode;
+                for (let post of response.results) {
+                    let poseNode = similarItemTemplate({
+                        id: post.id,
+                        thumbnailUrl: post.thumbnailUrl,
+                    });
+                    listNode.appendChild(poseNode);
+                }
+            });
     }
 }
 

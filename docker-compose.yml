@@ -49,3 +49,5 @@ services:
     volumes:
       - "${MOUNT_SQL}:/var/lib/postgresql/data"
       - "/home/vince/nbbackup:/backup"
+    # ports:
+    #   - 5432:5432
