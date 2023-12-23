@@ -4,6 +4,8 @@ import math
 import re
 import shlex
 import subprocess
+import struct
+import zlib
 from io import BytesIO
 from typing import List
 
@@ -270,6 +272,21 @@ class Image:
             # https://trac.ffmpeg.org/ticket/6521
             self.content = convert_heif_to_png(self.content)
         extension = mime.get_extension(mime_type)
+        if mime_type == "application/x-sticknodes-figure" or mime_type == "application/x-sticknodes-project" or mime_type == "application/x-sticknodes-clip" or mime_type == "application/x-sticknodes-asset":
+            # PNG file signature
+            signature = b'\x89PNG\r\n\x1a\n'
+            
+            # IHDR chunk for a 5x5 image with RGB color and maximum compression
+            ihdr_chunk = struct.pack('>I4sIIIBB', 13, b'IHDR', 5, 5, 8, 2, 0)
+            
+            # CRC32 checksum for IHDR chunk
+            ihdr_crc = struct.pack('>I', zlib.crc32(ihdr_chunk[4:]))
+            
+            # Combine all parts
+            png_bytes = signature + ihdr_chunk + ihdr_crc
+            
+            extension = "png"
+            self.content = png_bytes
         assert extension
         with util.create_temp_file(suffix="." + extension) as handle:
             handle.write(self.content)

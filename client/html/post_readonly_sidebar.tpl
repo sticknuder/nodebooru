@@ -17,6 +17,10 @@
                     'video/mp4': 'MPEG-4',
                     'video/quicktime': 'MOV',
                     'application/x-shockwave-flash': 'SWF',
+                    'application/x-sticknodes-figure': 'NODES',
+                    'application/x-sticknodes-project': 'STKNDS',
+                    'application/x-sticknodes-clip': 'NODEMC',
+                    'application/x-sticknodes-asset': 'SNASSET'
                 }[ctx.post.mimeType] %>
             </a>
             (<%- ctx.post.canvasWidth %>x<%- ctx.post.canvasHeight %>)

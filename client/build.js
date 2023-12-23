@@ -246,6 +246,17 @@ function bundleConfig() {
 
 function bundleBinaryAssets() {
     fs.copyFileSync('./img/favicon.png', './public/img/favicon.png');
+
+    fs.copyFileSync('./assets/stickfigureThumbnail.png', './public/stickfigureThumbnail.png');
+    fs.copyFileSync('./assets/movieclipThumbnail.png', './public/movieclipThumbnail.png');
+    fs.copyFileSync('./assets/projectThumbnail.png', './public/projectThumbnail.png');
+    fs.copyFileSync('./assets/snassetThumbnail.png', './public/snassetThumbnail.png');
+
+    fs.copyFileSync('./assets/stickfigure.png', './public/stickfigure.png');
+    fs.copyFileSync('./assets/movieclip.png', './public/movieclip.png');
+    fs.copyFileSync('./assets/project.png', './public/project.png');
+    fs.copyFileSync('./assets/snasset.png', './public/snasset.png');
+
     console.info('Copied images');
 
     fs.copyFileSync('./fonts/open_sans.woff2', './public/fonts/open_sans.woff2')

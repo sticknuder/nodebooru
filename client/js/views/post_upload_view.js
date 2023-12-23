@@ -12,6 +12,10 @@ function _mimeTypeToPostType(mimeType) {
     return (
         {
             "application/x-shockwave-flash": "flash",
+            "application/x-sticknodes-figure": "stickfigure",
+            "application/x-sticknodes-project": "project",
+            "application/x-sticknodes-clip": "movieclip",
+            "application/x-sticknodes-asset": "snasset",
             "image/gif": "image",
             "image/jpeg": "image",
             "image/png": "image",
@@ -112,6 +116,10 @@ class Url extends Uploadable {
     get mimeType() {
         let mime = {
             swf: "application/x-shockwave-flash",
+            nodes: "application/x-sticknodes-figure",
+            stknds: "application/x-sticknodes-project",
+            nodemc: "application/x-sticknodes-clip",
+            snasset: "application/x-sticknodes-asset",
             jpg: "image/jpeg",
             png: "image/png",
             gif: "image/gif",

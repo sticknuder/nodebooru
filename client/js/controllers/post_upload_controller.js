@@ -161,7 +161,7 @@ class PostUploadController {
 
                 // no duplicates, proceed with saving
                 let post = this._uploadableToPost(uploadable);
-                let savePromise = post.save(uploadable.anonymous).then(() => {
+                let savePromise = post.save(uploadable).then(() => {
                     this._view.removeUploadable(uploadable);
                     return Promise.resolve();
                 });
@@ -185,6 +185,7 @@ class PostUploadController {
         let post = new Post();
         post.safety = uploadable.safety;
         post.flags = uploadable.flags;
+        // post.fileName = uploadable.file.name;
         for (let tagName of uploadable.tags) {
             const tag = new Tag();
             tag.names = [tagName];

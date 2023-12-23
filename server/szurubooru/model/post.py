@@ -186,6 +186,8 @@ class PostSignature(Base):
 class Post(Base):
     __tablename__ = "post"
 
+    file_name = ""
+
     SAFETY_SAFE = "safe"
     SAFETY_SKETCHY = "sketchy"
     SAFETY_UNSAFE = "unsafe"
@@ -194,6 +196,10 @@ class Post(Base):
     TYPE_ANIMATION = "animation"
     TYPE_VIDEO = "video"
     TYPE_FLASH = "flash"
+    TYPE_SNASSET = "snasset"
+    TYPE_STICKFIGURE = "stickfigure"
+    TYPE_PROJECT = "project"
+    TYPE_MOVIECLIP = "movieclip"
 
     FLAG_LOOP = "loop"
     FLAG_SOUND = "sound"

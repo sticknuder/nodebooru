@@ -242,12 +242,18 @@ class Post extends events.EventTarget {
         return Promise.all(ops);
     }
 
-    save(anonymous) {
+    save(uploadable) {
         const files = {};
-        const detail = { version: this._version };
+        const detail = { 
+            version: this._version,
+        };
+
+        if (uploadable) {
+            detail.fileName = uploadable.file.name
+        }
 
         // send only changed fields to avoid user privilege violation
-        if (anonymous === true) {
+        if (uploadable && uploadable.anonymous === true) {
             detail.anonymous = true;
         }
         if (this._safety !== this._orig._safety) {
