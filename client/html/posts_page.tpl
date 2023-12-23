@@ -6,10 +6,32 @@
                     <a class='thumbnail-wrapper <%= post.tags.length > 0 ? "tags" : "no-tags" %>'
                             title='@<%- post.id %> (<%- post.type %>)&#10;&#10;Tags: <%- post.tags.map(tag => '#' + tag.names[0]).join(' ') || 'none' %>'
                             href='<%= ctx.canViewPosts ? ctx.getPostUrl(post.id, ctx.parameters) : '' %>'>
-                        <%= ctx.makeThumbnail(post.thumbnailUrl) %>
+
+                        <% console.log(post); %>
+
+                        <% if (post.hasCustomThumbnail !== true && post.type === 'snasset') { %>
+                            <%= ctx.makeThumbnail("snassetThumbnail.png") %>
+                        <% } else if (post.hasCustomThumbnail !== true && post.type === 'stickfigure') { %>
+                            <%= ctx.makeThumbnail("stickfigureThumbnail.png") %>
+                        <% } else if (post.hasCustomThumbnail !== true && post.type === 'project') { %>
+                            <%= ctx.makeThumbnail("projectThumbnail.png") %>
+                        <% } else if (post.hasCustomThumbnail !== true && post.type === 'movieclip') { %>
+                            <%= ctx.makeThumbnail("movieclipThumbnail.png") %>
+                        <% } else { %>
+                            <%= ctx.makeThumbnail(post.thumbnailUrl) %>
+                        <% } %>
+                          
                         <span class='type' data-type='<%- post.type %>'>
                             <% if (post.type == 'video' || post.type == 'flash' || post.type == 'animation') { %>
                                 <span class='icon'><i class='fa fa-film'></i></span>
+                            <% } else if (post.type == 'snasset') { %>
+                                <span class='icon'><i class='fa fa-cube'></i></span>
+                            <% } else if (post.type == 'stickfigure') { %>
+                                <span class='icon'><i class='fa fa-male'></i></span>
+                            <% } else if (post.type == 'project') { %>
+                                <span class='icon'><i class='fa fa-archive'></i></span>
+                            <% } else if (post.type == 'movieclip') { %>
+                                <span class='icon'><i class='fa fa-file-video-o'></i></span>
                             <% } else { %>
                                 <%- post.type %>
                             <% } %>

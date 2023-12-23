@@ -77,8 +77,9 @@ def create_post(
         "flags", default=posts.get_default_flags(content)
     )
 
+    file_name = ctx.get_param_as_string("fileName")
     post, new_tags = posts.create_post(
-        content, tag_names, None if anonymous else ctx.user
+        content, tag_names, None if anonymous else ctx.user, file_name
     )
     if len(new_tags):
         auth.verify_privilege(ctx.user, "tags:create")

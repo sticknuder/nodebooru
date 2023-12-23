@@ -27,6 +27,54 @@
             'Your browser doesn\'t support HTML5 videos.')
         %>
 
+    <% } else if (ctx.post.type === 'snasset') { %>
+
+        <% if (ctx.post.hasCustomThumbnail === true) { %>
+            
+            <img class='resize-listener' alt='' src='<%- ctx.post.thumbnailUrl %>'/>
+
+        <% } else { %>
+
+            <img class='resize-listener' alt='' src='/snasset.png'/>
+
+        <% } %>
+    
+    <% } else if (ctx.post.type === 'stickfigure') { %>
+
+        <% if (ctx.post.hasCustomThumbnail === true) { %>
+            
+            <img class='resize-listener' alt='' src='<%- ctx.post.thumbnailUrl %>'/>
+
+        <% } else { %>
+
+            <img class='resize-listener' alt='' src='/stickfigure.png'/>
+
+        <% } %>
+
+    <% } else if (ctx.post.type === 'project') { %>
+
+        <% if (ctx.post.hasCustomThumbnail === true) { %>
+            
+            <img class='resize-listener' alt='' src='<%- ctx.post.thumbnailUrl %>'/>
+
+        <% } else { %>
+
+            <img class='resize-listener' alt='' src='/project.png'/>
+
+        <% } %>
+
+    <% } else if (ctx.post.type === 'movieclip') { %>
+
+        <% if (ctx.post.hasCustomThumbnail === true) { %>
+            
+            <img class='resize-listener' alt='' src='<%- ctx.post.thumbnailUrl %>'/>
+
+        <% } else { %>
+
+            <img class='resize-listener' alt='' src='/movieclip.png'/>
+
+        <% } %>
+
     <% } else { console.log(new Error('Unknown post type')); } %>
 
     <div class='post-overlay resize-listener'>

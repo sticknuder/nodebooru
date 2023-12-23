@@ -89,6 +89,10 @@ TYPE_MAP = {
     model.Post.TYPE_ANIMATION: "animation",
     model.Post.TYPE_VIDEO: "video",
     model.Post.TYPE_FLASH: "flash",
+    model.Post.TYPE_SNASSET: "snasset",
+    model.Post.TYPE_STICKFIGURE: "stickfigure",
+    model.Post.TYPE_PROJECT: "project",
+    model.Post.TYPE_MOVIECLIP: "movieclip",
 }
 
 FLAG_MAP = {
@@ -406,7 +410,7 @@ def try_get_featured_post() -> Optional[model.Post]:
 
 
 def create_post(
-    content: bytes, tag_names: List[str], user: Optional[model.User]
+    content: bytes, tag_names: List[str], user: Optional[model.User], file_name: str = ""
 ) -> Tuple[model.Post, List[model.Tag]]:
     post = model.Post()
     post.safety = model.Post.SAFETY_SAFE
@@ -417,6 +421,7 @@ def create_post(
     post.type = ""
     post.checksum = ""
     post.mime_type = ""
+    post.file_name = file_name
 
     update_post_content(post, content)
     new_tags = update_post_tags(post, tag_names)
@@ -610,7 +615,7 @@ def update_post_content(post: model.Post, content: Optional[bytes]) -> None:
         raise InvalidPostContentError("Post content missing.")
 
     update_signature = False
-    post.mime_type = mime.get_mime_type(content)
+    post.mime_type = mime.get_mime_type(content, post)
     if mime.is_flash(post.mime_type):
         post.type = model.Post.TYPE_FLASH
     elif mime.is_image(post.mime_type):
@@ -621,6 +626,14 @@ def update_post_content(post: model.Post, content: Optional[bytes]) -> None:
             post.type = model.Post.TYPE_IMAGE
     elif mime.is_video(post.mime_type):
         post.type = model.Post.TYPE_VIDEO
+    elif post.mime_type == "application/x-sticknodes-asset":
+        post.type = model.Post.TYPE_SNASSET
+    elif post.mime_type == "application/x-sticknodes-figure":
+        post.type = model.Post.TYPE_STICKFIGURE
+    elif post.mime_type == "application/x-sticknodes-project":
+        post.type = model.Post.TYPE_PROJECT
+    elif post.mime_type == "application/x-sticknodes-clip":
+        post.type = model.Post.TYPE_MOVIECLIP
     else:
         raise InvalidPostContentError(
             "Unhandled file type: %r" % post.mime_type
@@ -660,7 +673,7 @@ def update_post_content(post: model.Post, content: Optional[bytes]) -> None:
     if (post.canvas_width is not None and post.canvas_width <= 0) or (
         post.canvas_height is not None and post.canvas_height <= 0
     ):
-        if not config.config["allow_broken_uploads"]:
+        if config.config["allow_broken_uploads"]: # !! changed for my specific use case !! if not config.config["allow_broken_uploads"]: --> if config.config["allow_broken_uploads"]:
             raise InvalidPostContentError(
                 "Invalid image dimensions returned during processing"
             )
@@ -686,11 +699,14 @@ def generate_post_thumbnail(post: model.Post) -> None:
     try:
         assert content
         image = images.Image(content)
-        image.resize_fill(
-            int(config.config["thumbnails"]["post_width"]),
-            int(config.config["thumbnails"]["post_height"]),
-        )
-        files.save(get_post_thumbnail_path(post), image.to_jpeg())
+        if post.type == "stickfigure" or post.type == "project" or post.type == "nodemc" or post.type == "snasset":
+            files.save(get_post_thumbnail_path(post), content)
+        else:
+            image.resize_fill(
+                int(config.config["thumbnails"]["post_width"]),
+                int(config.config["thumbnails"]["post_height"]),
+            )
+            files.save(get_post_thumbnail_path(post), image.to_jpeg())
     except errors.ProcessingError:
         files.save(get_post_thumbnail_path(post), EMPTY_PIXEL)
 

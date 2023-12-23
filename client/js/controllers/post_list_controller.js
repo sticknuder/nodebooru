@@ -21,6 +21,7 @@ const fields = [
     "commentCount",
     "tags",
     "version",
+    "hasCustomThumbnail"
 ];
 
 class PostListController {

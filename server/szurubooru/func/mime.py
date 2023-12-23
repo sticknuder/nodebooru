@@ -1,8 +1,10 @@
 import re
+import os
+from szurubooru import model
 from typing import Optional
 
 
-def get_mime_type(content: bytes) -> str:
+def get_mime_type(content: bytes, post: model.Post = None) -> str:
     if not content:
         return "application/octet-stream"
 
@@ -42,12 +44,31 @@ def get_mime_type(content: bytes) -> str:
     if content[4:12] == b"ftypqt  ":
         return "video/quicktime"
 
+    if 100 <= int.from_bytes(content[0:4], byteorder='big', signed=True) <= 1000:
+        return "application/x-sticknodes-figure"
+    
+    if list(content[0:6]) == [1, 2, 3, 4, 5, 6]:
+        if post != None:
+            ext, name = get_post_file_extension(post)
+            if ext == "stknds":
+                return "application/x-sticknodes-project"
+            elif ext == "nodemc":
+                return "application/x-sticknodes-clip"
+            else:
+                return "application/x-sticknodes-asset"
+        else:
+            return "application/x-sticknodes-asset"
+
     return "application/octet-stream"
 
 
 def get_extension(mime_type: str) -> Optional[str]:
     extension_map = {
         "application/x-shockwave-flash": "swf",
+        "application/x-sticknodes-figure": "nodes",
+        "application/x-sticknodes-project": "stknds",
+        "application/x-sticknodes-clip": "nodemc",
+        "application/x-sticknodes-asset": "snasset",
         "image/gif": "gif",
         "image/jpeg": "jpg",
         "image/png": "png",
@@ -104,3 +125,11 @@ def is_heif(mime_type: str) -> bool:
         "image/heic",
         "image/avif",
     )
+
+def get_post_file_extension(post: model.Post) -> str:
+    file_name = post.file_name
+    return get_file_extension(file_name), post.file_name
+
+def get_file_extension(filename):
+    _, file_extension = os.path.splitext(filename)
+    return file_extension[1:]
