@@ -7,6 +7,7 @@ version: '2'
 services:
 
   server:
+    restart: unless-stopped
     build:
       context: ./server
     depends_on:
@@ -28,6 +29,7 @@ services:
       - "./server/config.yaml:/opt/app/config.yaml"
 
   client:
+    restart: unless-stopped
     build:
       context: ./client
     depends_on:
