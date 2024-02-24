@@ -56,6 +56,7 @@ class PostMainController extends BasePostController {
                     canFeaturePosts: api.hasPrivilege("posts:feature"),
                     canListComments: api.hasPrivilege("comments:list"),
                     canCreateComments: api.hasPrivilege("comments:create"),
+                    canEditPostDescription: api.hasPrivilege("posts:edit:description") || post.user !== null && post.user.name === api.getUserName(),
                     parameters: parameters,
                 });
 

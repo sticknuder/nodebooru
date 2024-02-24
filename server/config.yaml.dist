@@ -116,6 +116,7 @@ privileges:
     'posts:edit:source':            regular
     'posts:edit:tags':              regular
     'posts:edit:thumbnail':         power
+    'posts:edit:description':       power
     'posts:feature':                moderator
     'posts:delete':                 moderator
     'posts:score':                  regular

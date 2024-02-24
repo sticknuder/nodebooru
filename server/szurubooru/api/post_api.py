@@ -168,7 +168,12 @@ def update_post(ctx: rest.Context, params: Dict[str, str]) -> rest.Response:
         auth.verify_privilege(ctx.user, "posts:edit:thumbnail")
         posts.update_post_thumbnail(post, ctx.get_file("thumbnail"))
     if ctx.has_param("description"):
-        # auth.verify_privilege(ctx.user, "posts:edit:description")
+        if not hasattr(ctx, 'user') or not hasattr(ctx.user, 'user_id'):
+            raise errors.AuthError("Insufficient privileges to do this.")
+
+        if hasattr(post, 'user') and hasattr(post.user, 'user_id') and ctx.user.user_id != post.user.user_id:
+            auth.verify_privilege(ctx.user, "posts:edit:description")
+
         posts.update_post_description(
             post, ctx.get_param_as_string("description")
         )

@@ -707,8 +707,8 @@ def generate_post_thumbnail(post: model.Post) -> None:
     try:
         assert content
         image = images.Image(content)
-        if post.type == "stickfigure" or post.type == "project" or post.type == "nodemc" or post.type == "snasset":
-            files.save(get_post_thumbnail_path(post), content)
+        if post.type == "stickfigure" or post.type == "project" or post.type == "movieclip" or post.type == "snasset":
+            files.save(get_post_thumbnail_path(post), image.to_jpeg())
         else:
             image.resize_fill(
                 int(config.config["thumbnails"]["post_width"]),

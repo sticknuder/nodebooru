@@ -173,7 +173,7 @@ class PostUploadView extends events.EventTarget {
             this._contentInputNode,
             {
                 extraText:
-                    "Allowed extensions (common): .jpg, .png, .gif, .webm, .mp4, .nodes, .stknds, .nodemc\nAllowed extensions (other): .swf, .avif, .heif, .heic",
+                    "Allowed extensions: .jpg, .png, .gif, .webm, .mp4, .nodes, .stknds, .nodemc, .swf, .avif, .heif, .heic",
                 allowUrls: true,
                 allowMultiple: true,
                 lock: false,

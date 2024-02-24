@@ -13,3 +13,6 @@ server/**/lib/
 server/**/bin/
 server/**/pyvenv.cfg
 __pycache__/
+
+# My personal thing
+commands.txt

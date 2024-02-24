@@ -76,7 +76,7 @@
         </tr>
         <tr>
             <td><code>type</code></td>
-            <td>given type of posts. <code>&lt;value&gt;</code> can be either <code>image</code>, <code>animation</code> (or <code>animated</code> or <code>anim</code>), <code>flash</code> (or <code>swf</code>) or <code>video</code> (or <code>webm</code>).</td>
+            <td>given type of posts. <code>&lt;value&gt;</code> can be either <code>image</code>, <code>animation</code> (or <code>animated</code> or <code>anim</code>), <code>flash</code> (or <code>swf</code>), <code>video</code> (or <code>webm</code>), <code>stickfigure</code> (or <code>nodes</code>), <code>movieclip</code> (or <code>nodemc</code>), <code>project</code> (or <code>stknds</code>), or <code>snasset</code></td>
         </tr>
         <tr>
             <td><code>flag</code></td>

@@ -108,6 +108,11 @@ class Api extends events.EventTarget {
         return !!remoteConfig.enableSafety;
     }
 
+    // Probably not the same as the above getter functions
+    getUserName() {
+        return this.userName;
+    }
+
     hasPrivilege(lookup) {
         let minViableRank = null;
         for (let p of Object.keys(remoteConfig.privileges)) {
@@ -295,8 +300,10 @@ class Api extends events.EventTarget {
         // its tokens.
         data = Object.assign({}, data);
         let abortFunction = () => {};
+        console.log(files);
+        console.log(files && files.thumbnail !== null); // added these logs last, future me. already built, just check it out and go from there
         let promise = Promise.resolve();
-        if (files) {
+        if (files && files.thumbnail !== null) {
             for (let key of Object.keys(files)) {
                 const file = files[key];
                 const fileId = this._getFileId(file);

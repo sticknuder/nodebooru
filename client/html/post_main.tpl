@@ -54,11 +54,11 @@
     <div class='content'>
         <div class='post-container'></div>
 
-        <% if (ctx.editMode) { %>
-            <h2>Description</h2>
+        <% if (ctx.editMode && ctx.canEditPostDescription === true) { %>
             <%= ctx.makeTextarea({
                 id: 'post-description',
                 value: ctx.post.description,
+                placeholder: 'type to add a description to this post...',
             }) %>
         <% } else if (ctx.post.description != undefined) { %>
             <div class='description-container'>

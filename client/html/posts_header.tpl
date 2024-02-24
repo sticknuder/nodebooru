@@ -5,6 +5,7 @@
         %><input class='mousetrap' type='submit' value='Search'/><%
         %><wbr/><%
         %><% if (ctx.enableSafety) { %><%
+            %><input class="mousetrap" value="Safety filter:" style="background-color:transparent; color:black ; border:0; padding-right:0.2em; margin-right:0" type="submit" disabled="true"><%
             %><input data-safety=safe type='button' class='mousetrap safety safety-safe <%- ctx.settings.listPosts.safe ? '' : 'disabled' %>'/><%
             %><input data-safety=sketchy type='button' class='mousetrap safety safety-sketchy <%- ctx.settings.listPosts.sketchy ? '' : 'disabled' %>'/><%
             %><input data-safety=unsafe type='button' class='mousetrap safety safety-unsafe <%- ctx.settings.listPosts.unsafe ? '' : 'disabled' %>'/><%
