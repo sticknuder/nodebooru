@@ -57,7 +57,7 @@ class TopNavigation extends events.EventTarget {
     setTitle(title) {
         api.fetchConfig().then(() => {
             document.oldTitle = null;
-            document.title = (title ? title + " – ": "") + api.getName() + " - NSFW Stick Nodes Art Archive";
+            document.title = (title ? title + " – ": "") + api.getName() + " - Stick Nodes Art/Asset Archive";
         });
     }
 
@@ -80,6 +80,10 @@ function _makeTopNavigation() {
     const ret = new TopNavigation();
     ret.add("home", new TopNavigationItem("H", "Home", ""));
     ret.add("posts", new TopNavigationItem("P", "Posts", "posts"));
+    ret.add("media", new TopNavigationItem("I", "Media", "posts/query=type%3Aimage%2Cvideo%2Canim"));
+    ret.add("stickfigures", new TopNavigationItem("F", "Stickfigures", "posts/query=type%3Astickfigure"));
+    ret.add("movieclips", new TopNavigationItem("M", "Movieclips", "posts/query=type%3Amovieclip"));
+    ret.add("projects", new TopNavigationItem("P", "Projects", "posts/query=type%3Aproject"));
     ret.add("upload", new TopNavigationItem("U", "Upload", "upload"));
     ret.add("comments", new TopNavigationItem("C", "Comments", "comments"));
     ret.add("tags", new TopNavigationItem("T", "Tags", "tags"));
