@@ -29,7 +29,10 @@ services:
       - "./server/config.yaml:/opt/app/config.yaml"
 
   client:
+<<<<<<< HEAD
     restart: unless-stopped
+=======
+>>>>>>> a280ec7b90365aaaf1085c0f07bd3c973ea7341a
     build:
       context: ./client
     depends_on:

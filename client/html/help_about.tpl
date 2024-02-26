@@ -7,7 +7,6 @@ Gelbooru, Moebooru, Rule34, r34, and panheal. It runs on the open source image b
 
 <p><strong>By viewing posts marked as "unsafe", you confirm that you are 18 years or older.<strong></p>
 
-
 <p class='section'><strong>Upload Policy<strong></p>
 
 <p>The purpose of booru sites is to amass content by allowing any user to 
@@ -25,8 +24,20 @@ on Discord. Your works will be removed promptly.</p>
 Gravatar and for password resets (currently disabled until I can set up a smtp server). Only you, admins, and the owner can see it.</p>
 
 <p>You can delete your account at any time. Posts you uploaded will
+<<<<<<< HEAD
 stay unless an admin removes them.</p>
 
 <p class='section'><strong>Communication</strong></p>
 
 <p>For real-time communication with the community, moderators, admins, and the owner, join the official <a href="https://discord.com/invite/f9ZwGgBHz9">Nodebooru Discord Server</a>.</p>
+=======
+stay, unless some angry admin removes them.</p>
+
+<p class='section'><strong>Communication</strong></p>
+
+<p>For real-time communication with the community, moderators, admins, and the owner, join the official <a href="https://discord.com/invite/f9ZwGgBHz9">Nodebooru Discord Server</a>.</p>
+
+<p class='section'><strong>Search Engine Optimization</strong></p>
+
+<p>Find Stick Nodes content that includes things such as boobs, pussy, ass, vagina, cock, penis, cum, blowjob, handjob, nudes, sex, butt, tits, and more.</p>
+>>>>>>> a280ec7b90365aaaf1085c0f07bd3c973ea7341a

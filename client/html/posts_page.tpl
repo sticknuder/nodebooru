@@ -6,7 +6,6 @@
                     <a class='thumbnail-wrapper <%= post.tags.length > 0 ? "tags" : "no-tags" %>'
                             title='@<%- post.id %> (<%- post.type %>)&#10;&#10;Tags: <%- post.tags.map(tag => '#' + tag.names[0]).join(' ') || 'none' %>'
                             href='<%= ctx.canViewPosts ? ctx.getPostUrl(post.id, ctx.parameters) : '' %>'>
-
                         <% if (post.hasCustomThumbnail !== true && post.type === 'snasset') { %>
                             <%= ctx.makeThumbnail("snassetThumbnail.png") %>
                         <% } else if (post.hasCustomThumbnail !== true && post.type === 'stickfigure') { %>
